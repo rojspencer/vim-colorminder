@@ -7,9 +7,11 @@ if exists("g:colorminder_loaded") || v:version < 700
   finish
 endif
 let g:colorminder_loaded = 1
+let s:script_folder_path = escape( expand( '<sfile>:p:h' ), '\' )
+let s:vim_folder_path = s:script_folder_path . '/../../../'
 
-if !exists("colorminder_last_colorscheme")
-  let colorminder_last_colorscheme = $HOME."/.vim/.last_colorscheme"
+if !exists("s:last_colorscheme_file")
+  let s:last_colorscheme_file = s:vim_folder_path.".last_colorscheme"
 end
 
 function! SaveCurrentColorScheme(file)
@@ -18,13 +20,13 @@ function! SaveCurrentColorScheme(file)
     call writefile(mycolorscheme, a:file)
   end
 endfunction
-if filereadable(colorminder_last_colorscheme)
-  exec "source ".colorminder_last_colorscheme
+if filereadable(s:last_colorscheme_file)
+  exec "source ".s:last_colorscheme_file
 else
   colorscheme jellybeans
 endif
 augroup colorminder
   au!
-  autocmd ColorScheme * call SaveCurrentColorScheme(colorminder_last_colorscheme)
+  autocmd ColorScheme * call SaveCurrentColorScheme(s:last_colorscheme_file)
 augroup END
 
