@@ -8,8 +8,8 @@ INTRODUCTION                                                  *colorminder*
 This plugin has vim remember color scheme changes automatically so that
 it gets loaded on subsequent starts of vim.
 
-It (mostly) eliminates the need to make changes to your .vimrc file every you
-change color schemes -- which can be convenient when your .vimrc is source controled.
+It (mostly) eliminates the need to make changes to your .vimrc file every time
+you change color schemes -- which can be convenient when your .vimrc is source controled.
 
 ==============================================================================
 FEATURES                                             *colorminder-features*
@@ -39,7 +39,7 @@ Following are some options that can be set.
    Path to the file to store color schemes used on startup. If the default for
    this file is under source control you should specify another location for
    the file.
-   Default: ~/.vim/.colorminder_last_colorscheme
+   Default: ~/.vim/.colorminder_last_colorscheme (or the windows equivilant)
 
 ==============================================================================
 ISSUES                                          *colorminder-issues*
@@ -48,6 +48,11 @@ Does not handle any additional settings a color scheme may require.  For
 example, if a theme has both dark and light versions and that is controlled by
 setting background, you will have to ensure background is set in your .vimrc
 per your preference.
+
+This plugin relies on the chosen color scheme setting 'g:colors_name'.
+If the color scheme fails to set this then things will not work.  There is an
+attempt to shoot out a warning if a chosen color scheme is not setting
+'g:colors_scheme'.
 
 
 
