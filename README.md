@@ -48,7 +48,7 @@ Thus Color Minder.
     let g:colorminder_scheme_default_gui = "hybrid"
     let g:colorminder_scheme_default_term = "jellybeans"
 
-The last one ensures that if there hasn't been a previously saved color scheme you won't be staring at vim's 'default' scheme first time you start vim (or starting on a new computer).  If you don't mind seeing the default color scheme until you change it for the first time, then don't bother setting these.
+This ensures that if there hasn't been a previously saved color scheme you won't be staring at vim's 'default' scheme first time you start vim (or starting on a new computer).  If you don't mind seeing the default color scheme until you change it for the first time then don't bother setting these.
 
 ### Options
 
