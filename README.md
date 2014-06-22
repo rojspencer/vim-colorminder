@@ -48,7 +48,7 @@ Thus Color Minder.
     let g:colorminder_scheme_default_gui = "hybrid"
     let g:colorminder_scheme_default_term = "jellybeans"
 
-The last one ensures that if there hasn't been a previously saved color scheme you won't be staring at vim's 'default' scheme first time you start vim (or starting on a new computer).
+The last one ensures that if there hasn't been a previously saved color scheme you won't be staring at vim's 'default' scheme first time you start vim (or starting on a new computer).  If you don't mind seeing the default color scheme until you change it for the first time, then don't bother setting these.
 
 ### Options
 
@@ -82,3 +82,5 @@ This plugin relies on the chosen color scheme setting `g:colors_name`.  If the c
 attempt to shoot out a warning if a color scheme is not setting `g:colors_scheme`.
 
 Some color themes have multiple variations but don't update `g:colors_name` to reflect those.  For example, the [sol](https://github.com/Pychimp/vim-sol.git) theme as 'sol' and 'sol-term'.  If you set `:colorscheme sol-term` `g:colors_name` is only updated to be 'sol' and that's what gets remembered.  Not sure if there is anything I can do about that.
+
+This was my first vim plugin.  Was fun learning how to do this but things may not be perfect.
