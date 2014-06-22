@@ -55,7 +55,7 @@ function! s:file_contents()
   else
     if exists("gui_scheme")
       let contents +=  ['  colorscheme ' . gui_scheme]
-    else
+    elseif exists("term_scheme")
       let contents += ['  colorscheme ' . term_scheme]
     end
   end
@@ -101,7 +101,7 @@ if filereadable(s:last_colorscheme_file)
 else
   " see if defaults are set and use those
   if has("gui_running")
-    if exists("g:colorminder_scheme_default_gui)
+    if exists("g:colorminder_scheme_default_gui")
       exec 'colorscheme ' . g:colorminder_scheme_default_gui
       call ColorminderSaveCurrentColorScheme()
     end
