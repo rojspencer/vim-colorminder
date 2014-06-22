@@ -1,0 +1,54 @@
+*colorminder.txt*  Plugin for automatically remembering colorscheme changes
+
+Author:  Roger Spencer <https://github.com/rojspencer/vim-colorminder>
+License: Same terms as Vim itself (see |license|)
+
+INTRODUCTION                                                  *colorminder*
+
+This plugin has vim remember color scheme changes automatically so that
+it gets loaded on subsequent starts of vim.
+
+It (mostly) eliminates the need to make changes to your .vimrc file every you
+change color schemes -- which can be convenient when your .vimrc is source controled.
+
+==============================================================================
+FEATURES                                             *colorminder-features*
+
+* Remembers gui and terminal vim color schemes seperately.
+
+That's about it so far.
+
+==============================================================================
+CONFIGURATION                                   *colorminder-configuration*
+
+Following are some options that can be set.
+
+*g:colorminder_scheme_default_gui*
+   Default color scheme to use in gui vim if one has not been set before.
+   Useful when first using the plugin or moving to a new computer.
+   Example: >
+      let g:colorminder_scheme_default_gui = "hybrid"
+
+*g:colorminder_scheme_default_term*
+   Default color scheme to use in terminal vim if one has not been set before.
+   Useful when first using the plugin or moving to a new computer.
+   Example: >
+      let g:colorminder_scheme_default_term = "jellybeans"
+
+*g:colorminder_last_colorscheme_file*
+   Path to the file to store color schemes used on startup. If the default for
+   this file is under source control you should specify another location for
+   the file.
+   Default: ~/.vim/.colorminder_last_colorscheme
+
+==============================================================================
+ISSUES                                          *colorminder-issues*
+
+Does not handle any additional settings a color scheme may require.  For
+example, if a theme has both dark and light versions and that is controlled by
+setting background, you will have to ensure background is set in your .vimrc
+per your preference.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
