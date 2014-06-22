@@ -8,67 +8,113 @@ if exists("g:colorminder_loaded") || v:version < 700
 endif
 
 let g:colorminder_loaded = 1
+let g:colorminder_set_colorscheme = 1
 let s:script_folder_path = escape( expand( '<sfile>:p:h' ), '\' )
 let s:vim_folder_path = s:script_folder_path . '/../../../'
 
-if !exists("s:last_colorscheme_file")
-  let s:last_colorscheme_file = s:vim_folder_path.".last_colorscheme"
-end
+function! s:get_last_colorscheme_file()
+  if !exists("g:colorminder_last_colorscheme_file")
+    return s:vim_folder_path.".colorminder_last_colorscheme"
+  end
+  return g:colorminder_last_colorscheme_file
+endfunction
+
+let s:last_colorscheme_file = s:get_last_colorscheme_file()
 
 function! s:file_contents()
   call s:set_scheme_vars()
-  return [
-    \'let g:colorminder_scheme_gui = "' . g:colorminder_scheme_gui . '"',
-    \'let g:colorminder_scheme_term = "' . g:colorminder_scheme_term . '"',
-    \'if has("gui")',
-    \'  colorscheme ' . g:colorminder_scheme_gui,
-    \'else',
-    \'  colorscheme ' . g:colorminder_scheme_term,
-    \'end']
+  if exists("g:colorminder_scheme_gui")
+    let gui_scheme = g:colorminder_scheme_gui
+  elseif exists("g:colorminder_scheme_default_gui")
+    let gui_scheme = g:colorminder_scheme_default_gui
+  end
+
+  if exists("g:colorminder_scheme_term")
+    let term_scheme = g:colorminder_scheme_term
+  elseif exists("g:colorminder_scheme_default_term")
+    let term_scheme = g:colorminder_scheme_default_term
+  end
+
+  let contents = []
+  if exists("term_scheme")
+    let contents += ['let g:colorminder_scheme_term = "' . term_scheme . '"']
+  end
+  if exists("gui_scheme")
+    let contents += ['let g:colorminder_scheme_gui = "' . gui_scheme . '"']
+  end
+
+  let contents += ['if g:colorminder_set_colorscheme == 1']
+
+  if exists("gui_scheme") && exists("term_scheme")
+    let contents += [
+      \'  if has("gui_running")',
+      \'    colorscheme ' . gui_scheme,
+      \'  else',
+      \'    colorscheme ' . term_scheme,
+      \'  end']
+  else
+    if exists("gui_scheme")
+      let contents +=  ['  colorscheme ' . gui_scheme]
+    else
+      let contents += ['  colorscheme ' . term_scheme]
+    end
+  end
+
+  let contents += ['end']
+
+  return contents
+
 endfunction
 
 function! s:set_scheme_vars()
-  if !exists("g:colors_name")
-    let s:colors_name = 'jellybeans'
-  else
+  if exists("g:colors_name")
     let s:colors_name = g:colors_name
+  else
+    echoerr "current colorscheme does not set g:colors_name - not remembering"
+    return 0
   end
 
-  if has("gui")
+  " source .colorminder_last_colorscheme without reseting colorscheme
+  " in case another instance that is gui and we're not
+  " or vice/versa has changed it's color scheme
+  let g:colorminder_set_colorscheme = 0
+  if filereadable(s:last_colorscheme_file)
+    exec "source ".s:last_colorscheme_file
+  end
+  let g:colorminder_set_colorscheme = 1
+
+  if has("gui_running")
     let g:colorminder_scheme_gui = s:colors_name
   else
     let g:colorminder_scheme_term = s:colors_name
   end
 
-  if !exists("g:colorminder_scheme_gui")
-    if exists("g:colorminder_scheme_term")
-      let g:colorminder_scheme_gui = g:colorminder_scheme_term
-    else
-      let g:colorminder_scheme_gui = g:colors_name
-    end
-  end
-  if !exists("g:colorminder_scheme_term")
-    if exists("g:colorminder_scheme_gui")
-      let g:colorminder_scheme_term = g:colorminder_scheme_gui
-    else
-      let g:colorminder_scheme_term = g:colors_name
-    end
-  end
 endfunction
 
-function! ColorminderSaveCurrentColorScheme(file)
+function! ColorminderSaveCurrentColorScheme()
   let file_contents = s:file_contents()
-  call writefile(file_contents, a:file)
+  call writefile(file_contents, s:last_colorscheme_file)
 endfunction
 
 if filereadable(s:last_colorscheme_file)
   exec "source ".s:last_colorscheme_file
 else
-  colorscheme jellybeans
+  " see if defaults are set and use those
+  if has("gui_running")
+    if exists("g:colorminder_scheme_default_gui)
+      exec 'colorscheme ' . g:colorminder_scheme_default_gui
+      call ColorminderSaveCurrentColorScheme()
+    end
+  else
+    if exists("g:colorminder_scheme_default_term")
+      exec 'colorscheme ' . g:colorminder_scheme_default_term
+      call ColorminderSaveCurrentColorScheme()
+    end
+  end
 endif
 
 augroup colorminder
   au!
-  autocmd ColorScheme * call ColorminderSaveCurrentColorScheme(s:last_colorscheme_file)
+  autocmd ColorScheme * call ColorminderSaveCurrentColorScheme()
 augroup END
 
