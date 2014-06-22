@@ -59,6 +59,9 @@ function! s:file_contents()
       let contents += ['  colorscheme ' . term_scheme]
     end
   end
+  if exists("g:colorminder_additional_lines")
+    let contents += g:colorminder_additional_lines
+  end
 
   let contents += ['end']
 

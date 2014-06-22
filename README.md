@@ -10,7 +10,7 @@ Problem is that unless I update my .vimrc with this new scheme, subsequent start
 
 Plus I use vim-promptline and if I don't update my .vimrc then the nice change of pace to vim's colors that automatically flow to my commnad line are lost when vim starts up with the old color scheme.
 
-My .vimrc ended up with crap like this:
+My .vimrc ended up with junk like this:
 
     " colorscheme hybrid
     " colorscheme codeschool
@@ -81,6 +81,6 @@ setting background, you will have to ensure background is set in your .vimrc per
 This plugin relies on the chosen color scheme setting `g:colors_name`.  If the color scheme fails to set this then things will not work.  There is an
 attempt to shoot out a warning if a color scheme is not setting `g:colors_scheme`.
 
-Some color themes have multiple variations but don't update `g:colors_name` to reflect those.  For example, the [sol](https://github.com/Pychimp/vim-sol.git) theme as 'sol' and 'sol-term'.  If you set `:colorscheme sol-term` `g:colors_name` is only updated to be 'sol' and that's what gets remembered.  Not sure if there is anything I can do about that.
+Some color themes have multiple variations but don't update `g:colors_name` to reflect those.  For example, the [sol](https://github.com/Pychimp/vim-sol.git) theme has 'sol' and 'sol-term'.  If you set `:colorscheme sol-term` `g:colors_name` is only updated to be 'sol' and that's what gets remembered.  Not sure if there is anything I can do about that.
 
 This was my first vim plugin.  Was fun learning how to do this but things may not be perfect.
