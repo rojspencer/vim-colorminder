@@ -100,7 +100,7 @@ function! ColorminderSaveCurrentColorScheme()
 endfunction
 
 if filereadable(s:last_colorscheme_file)
-  exec "source ".s:last_colorscheme_file
+  " exec "source ".s:last_colorscheme_file
 else
   " see if defaults are set and use those
   if has("gui_running")
