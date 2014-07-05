@@ -2,8 +2,7 @@
 " Maintainer:   Roger Spencer https://github.com/rojspencer
 " Version:      0.0.1
 
-
-if exists("g:loaded_colorminder") || v:version < 700
+if exists('g:loaded_colorminder') || &cp
   finish
 endif
 
