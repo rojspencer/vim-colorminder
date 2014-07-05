@@ -45,7 +45,7 @@ Following are some options that can be set.
   Additional script lines to add after color scheme loads.
   This is useful for color schemes that have multiple variations based on
   other settings that exist.
-  For example, the pencil and base16 color scheme has both light and dark
+  For example, the pencil and base16 color scheme have both light and dark
   versions and is based on the current setting of *background*
 
   Value should be an array of lines to inject after the call to *colorscheme*
