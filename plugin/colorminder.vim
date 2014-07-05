@@ -6,11 +6,15 @@ if exists('g:loaded_colorminder') || &cp
   finish
 endif
 
-" make sure fugitive and airline are loaded before me
+" make sure fugitive, gitgutter, and airline are loaded before me
 " airline doesn't properly load fugitive first due to
 " exisitng bugs? https://github.com/tpope/vim-fugitive/issues/463
 if !exists("g:loaded_fugitive")
   runtime! plugin/fugitive.vim
+endif
+
+if !exists("g:loaded_gitgutter")
+  runtime! plugin/gitgutter.vim
 endif
 
 if !exists("g:loaded_airline")
