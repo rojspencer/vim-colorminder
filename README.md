@@ -68,6 +68,7 @@ This ensures that if there hasn't been a previously saved color scheme you won't
   Default: `~/.vim/.colorminder_last_colorscheme`
 
   If this folder is source controlled in your environment, would be best to specify a different location.
+
   Example:
 
     let g:colorminder_last_colorscheme_file = $HOME . "/.last_colorscheme"
