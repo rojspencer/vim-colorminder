@@ -3,18 +3,29 @@
 " Version:      0.0.1
 
 
-if exists("g:colorminder_loaded") || v:version < 700
+if exists("g:loaded_colorminder") || v:version < 700
   finish
 endif
 
-let g:colorminder_loaded = 1
+" make sure fugitive and airline are loaded before me
+" airline doesn't properly load fugitive first due to
+" exisitng bugs? https://github.com/tpope/vim-fugitive/issues/463
+if !exists("g:loaded_fugitive")
+  runtime! plugin/fugitive.vim
+endif
+
+if !exists("g:loaded_airline")
+  runtime! plugin/airline.vim
+endif
+
+let g:loaded_colorminder = 1
 let g:colorminder_set_colorscheme = 1
 let s:script_folder_path = escape( expand( '<sfile>:p:h' ), '\' )
 let s:vim_folder_path = s:script_folder_path . '/../../../'
 
 function! s:get_last_colorscheme_file()
   if !exists("g:colorminder_last_colorscheme_file")
-    return s:vim_folder_path.".colorminder_last_colorscheme"
+    let g:colorminder_last_colorscheme_file = s:vim_folder_path.".colorminder_last_colorscheme"
   end
   return g:colorminder_last_colorscheme_file
 endfunction
@@ -100,7 +111,7 @@ function! ColorminderSaveCurrentColorScheme()
 endfunction
 
 if filereadable(s:last_colorscheme_file)
-  " exec "source ".s:last_colorscheme_file
+  exec "source ".s:last_colorscheme_file
 else
   " see if defaults are set and use those
   if has("gui_running")
