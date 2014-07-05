@@ -52,17 +52,17 @@ This ensures that if there hasn't been a previously saved color scheme you won't
 
 ### Options
 
-### g:colorminder_scheme_default_gui
+##### g:colorminder_scheme_default_gui
 
   Default color scheme for gui vim if one has not been previously remembered.
   Will use vim's "default" scheme if not specified.
 
-### g:colorminder_scheme_default_term
+##### g:colorminder_scheme_default_term
 
   Default color scheme for terminal vim if one has not been previously remembered.
   Will use vim's "default" scheme if not specified.
 
-### g:colorminder_last_colorscheme_file
+##### g:colorminder_last_colorscheme_file
 
   Path to file to store last used color scheme(s).
   Default: `~/.vim/.colorminder_last_colorscheme`
@@ -72,7 +72,7 @@ This ensures that if there hasn't been a previously saved color scheme you won't
 
     let g:colorminder_last_colorscheme_file = $HOME . "/.last_colorscheme"
 
-### g:colorminder_additional_lines
+##### g:colorminder_additional_lines
 
   Additional script lines to add after color scheme loads.
   This is useful for color schemes that have multiple variations based on
